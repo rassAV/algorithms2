@@ -45,18 +45,18 @@ class Widget():
         data = json.loads(s_json)
         match list(data.keys())[0]:
             case 'mainwindow':
-                instance = MainWindow(data['mainwindow'][1])
-                [instance.addChildren(cls.from_json(json.dumps(child))) for child in data['mainwindow'][0]]
+                app = MainWindow(data['mainwindow'][1])
+                [app.addChildren(cls.from_json(json.dumps(child))) for child in data['mainwindow'][0]]
             case 'layout':
-                instance = Layout(None, Alignment.HORIZONTAL if data['layout'][1]==1 else Alignment.VERTICAL)
-                [instance.addChildren(cls.from_json(json.dumps(child))) for child in data['layout'][0]]
+                app = Layout(None, Alignment.HORIZONTAL if data['layout'][1]==1 else Alignment.VERTICAL)
+                [app.addChildren(cls.from_json(json.dumps(child))) for child in data['layout'][0]]
             case 'lineedit':
-                instance = LineEdit(None, data['lineedit'][1])
-                [instance.addChildren(cls.from_json(json.dumps(child))) for child in data['lineedit'][0]]
+                app = LineEdit(None, data['lineedit'][1])
+                [app.addChildren(cls.from_json(json.dumps(child))) for child in data['lineedit'][0]]
             case 'combobox':
-                instance = ComboBox(None, data['combobox'][1])
-                [instance.addChildren(cls.from_json(json.dumps(child))) for child in data['combobox'][0]]
-        return instance
+                app = ComboBox(None, data['combobox'][1])
+                [app.addChildren(cls.from_json(json.dumps(child))) for child in data['combobox'][0]]
+        return app
 
     def __str__(self):
         return f"{self.__class__.__name__}{self.childrens}"
